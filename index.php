@@ -7,11 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 <body>
-	<main>
-		<h1>Virgil's Scheduler</h1>
-		<div id='schedule_container'></div>
-		
-	</main>
+	<div id='schedule_container'></div>
 	<script src="js/scheduler.js"></script>
 </body>
 </html>

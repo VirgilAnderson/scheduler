@@ -10,6 +10,7 @@ var Scheduler = (function()
 	function build_month(date)
 	{
 		// Set global date
+		active_date = date;
 
 		// Build template
 		body = build_template(date);
@@ -203,5 +204,5 @@ var Scheduler = (function()
 
 })();
 
-var d = new Date();
+var d = new Date(2019, 01, 01);
 Scheduler.month(d);
