@@ -6,7 +6,7 @@ body
 }
 main
 {
-	width: 50%;
+	width: 90%;
 	margin: 5% auto;
 	padding: 2.5% 5%;
 	background-color: white;
@@ -16,7 +16,7 @@ main
 	background-color: #f0f5f5;
 	margin: 0 auto;
 	padding: 0;
-	border: solid 2px black;
+	border: solid 1px black;
 	width: 100%;
 }
 #schedule_head
@@ -28,7 +28,6 @@ main
 	background-color: green;
 	margin: 0;
 	padding: 2.5% 5%;
-	border-bottom: solid 2px black;
 }
 #schedule_head span
 {
