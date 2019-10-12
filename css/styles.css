@@ -16,7 +16,7 @@ main
 	background-color: #f0f5f5;
 	margin: 0 auto;
 	padding: 0;
-	border: solid 1px black;
+	border: solid 2px black;
 	width: 100%;
 }
 #schedule_head
@@ -52,27 +52,4 @@ main
 {
 	background-color: yellow;
 	padding: 0;
-}
-.today
-{
-	background-color: red;
-}
-#control
-{
-	margin: 0;
-	padding: 0;
-}
-#control button
-{
-	margin: 0 .5%;
-	background-color: gray;
-	color: white;
-	padding: .5% 1%;
-	border: 0;
-	border-radius: 5%;
-}
-#control button:hover
-{
-	background-color: orange;
-	color: black;
 }
