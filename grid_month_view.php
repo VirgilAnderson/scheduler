@@ -9,7 +9,12 @@
 <body>
 	<main>
 		<h1>Virgil's Scheduler</h1>
+		<div id='scheduler'>
+			<div id='schedule_head'></div>
+			
+		</div>
 		
 	</main>
+	<script src="js/grid_month.js"></script>
 </body>
 </html>
