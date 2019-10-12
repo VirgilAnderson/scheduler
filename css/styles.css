@@ -67,7 +67,7 @@ main
 	margin: 0 .5%;
 	padding: .5% 2.5%;
 }
-#control button: hover
+#control button:hover
 {
 	background-color: orange;
 	color: black;
