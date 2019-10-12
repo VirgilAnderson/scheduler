@@ -28,6 +28,7 @@ main
 	background-color: green;
 	margin: 0;
 	padding: 2.5% 5%;
+	border-bottom: solid 2px black;
 }
 #schedule_head span
 {
@@ -35,38 +36,43 @@ main
 }
 #schedule_body
 {
-	width: 100%;
-	margin: 0;
-	padding: 0;
+	display: grid;
+	grid-template-columns: auto auto auto auto auto auto auto;
 }
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  text-align: center;
-}
-table
+.day
 {
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-thead
-{
+	text-align: center;
+	grid-gap: 0;
 	background-color: #f9ecf2;
+	margin: 0;
+	padding: 10%;
+	border: solid 1px black;
 }
-tr
+.day.week_head
 {
-	margin: 0;
+	background-color: yellow;
 	padding: 0;
-}
-td
-{	
-	margin: 0;
-	padding: 5%;
-	width: 14.28%;
 }
 .today
 {
-	background-color: #fff2e6;
+	background-color: red;
 }
-
+#control
+{
+	margin: 0;
+	padding: 0;
+}
+#control button
+{
+	margin: 0 .5%;
+	background-color: gray;
+	color: white;
+	padding: .5% 1%;
+	border: 0;
+	border-radius: 5%;
+}
+#control button:hover
+{
+	background-color: orange;
+	color: black;
+}
