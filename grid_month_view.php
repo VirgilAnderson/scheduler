@@ -11,7 +11,7 @@
 		<h1>Virgil's Scheduler</h1>
 		<div id='scheduler'>
 			<div id='schedule_head'></div>
-			
+			<div id='schedule_body'></div>
 		</div>
 		
 	</main>
