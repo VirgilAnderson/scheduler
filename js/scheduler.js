@@ -155,8 +155,6 @@ var Scheduler = (function()
 
 	function build_calendar(date, view, body)
 	{
-		
-
 		switch(view)
 		{
 			case 'month':
@@ -180,7 +178,6 @@ var Scheduler = (function()
 					}
 					
 					body.appendChild(node);
-
 				}
 				break;
 
@@ -206,5 +203,5 @@ var Scheduler = (function()
 
 })();
 
-var d = new Date(2019, 01, 14);
+var d = new Date();
 Scheduler.month(d);

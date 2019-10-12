@@ -6,7 +6,7 @@ body
 }
 main
 {
-	width: 90%;
+	width: 80%;
 	margin: 5% auto;
 	padding: 2.5% 5%;
 	background-color: white;
@@ -21,13 +21,13 @@ main
 }
 #schedule_head
 {
-	width: 90%;
+	width: 100%;
 	text-align: center;
 	font-weight: bold;
 	color: white;
 	background-color: green;
 	margin: 0;
-	padding: 2.5% 5%;
+	padding: 2.5% 0;
 	border-bottom: solid 2px black;
 }
 #schedule_head span
@@ -52,4 +52,23 @@ main
 {
 	background-color: yellow;
 	padding: 0;
+}
+#control
+{
+	margin: 0;
+	padding: 0;
+}
+#control button
+{
+	color: white;
+	background-color: gray;
+	border-radius: 5px;
+	border: 0;
+	margin: 0 .5%;
+	padding: .5% 2.5%;
+}
+#control button: hover
+{
+	background-color: orange;
+	color: black;
 }
