@@ -169,12 +169,12 @@ var Scheduler = (function()
 
 				var fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1);
 				var las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+				var lm_days = fir_of_curr_mon.getDay();
 
 				if ((fir_of_curr_mon.getDay() > 4 && las_of_curr_mon.getDate() > 30) || (fir_of_curr_mon.getDay() > 5 && las_of_curr_mon.getDate() > 29))
 				{
 					squares = 42;
 				}
-				var lm_days = fir_of_curr_mon = fir_of_curr_mon.getDay();
 
 				for (var i = 0; i < squares; i++)
 				{
@@ -185,6 +185,7 @@ var Scheduler = (function()
 					if (i >= lm_days && days <= las_of_curr_mon.getDate())
 					{
 						node.innerHTML = days;
+						node.classList.add('active');
 						days++;					
 					}
 					body.appendChild(node);
