@@ -41,10 +41,13 @@ var Scheduler = (function()
 
 			case 'week':
 				break;
+
 			case 'day':
 				break;
+
 			default:
 				console.log('error: no view passed');
+				break;
 		}
 	}
 
@@ -60,10 +63,13 @@ var Scheduler = (function()
 
 			case 'week':
 				break;
+
 			case 'day':
 				break;
+
 			default:
 				console.log('error: no view passed');
+				break;
 		}
 	}
 
@@ -121,7 +127,6 @@ var Scheduler = (function()
 			default:
 				console.log('error: no view passed');
 				break;
-
 		}
 	}
 
@@ -160,11 +165,11 @@ var Scheduler = (function()
 		{
 			case 'month':
 				var squares = 35;
+				var days = 1;
+
 				var fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 01);
 				var las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-				
 				var lm_days = fir_of_curr_mon = fir_of_curr_mon.getDay();
-				var days = 1;
 
 				for (var i = 0; i < squares; i++)
 				{
@@ -177,7 +182,6 @@ var Scheduler = (function()
 						node.innerHTML = days;
 						days++;					
 					}
-					
 					body.appendChild(node);
 				}
 				break;
