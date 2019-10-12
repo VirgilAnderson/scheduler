@@ -1,0 +1,68 @@
+body
+{
+	margin: 0;
+	padding: 0;
+	background-color: #e6e6ff;
+}
+main
+{
+	width: 50%;
+	margin: 5% auto;
+	padding: 2.5% 5%;
+	background-color: white;
+}
+#scheduler
+{
+	background-color: #f0f5f5;
+	margin: 0 auto;
+	padding: 0;
+	border: solid 2px black;
+	width: 80%;
+}
+#schedule_head
+{
+	width: 90%;
+	text-align: center;
+	font-weight: bold;
+	color: white;
+	background-color: green;
+	margin: 0;
+	padding: 2.5% 5%;
+	border-bottom: solid 2px black;
+}
+#schedule_head span
+{
+	font-size: 1.5em;
+}
+#schedule_body
+{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+}
+table
+{
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+thead
+{
+	background-color: #f9ecf2;
+}
+tr
+{
+	margin: 0;
+	padding: 0;
+}
+td
+{	
+	margin: 0;
+	padding: 5%;
+	width: 14.28%;
+}
