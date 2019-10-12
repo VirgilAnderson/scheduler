@@ -57,3 +57,22 @@ main
 {
 	background-color: red;
 }
+#control
+{
+	margin: 0;
+	padding: 0;
+}
+#control button
+{
+	margin: 0 .5%;
+	background-color: gray;
+	color: white;
+	padding: .5% 1%;
+	border: 0;
+	border-radius: 5%;
+}
+#control button:hover
+{
+	background-color: orange;
+	color: black;
+}

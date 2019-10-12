@@ -1,5 +1,6 @@
-var scheduler = (function()
+var Scheduler = (function()
 {
+	var active_date = new Date();
 	var week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 	var header = 7;
@@ -8,9 +9,12 @@ var scheduler = (function()
 	// Public Methods
 	function build_month(date)
 	{
+		// Set global date
+
 		// Build template
 		body = build_template(date);
 		build_head('month', body);
+		build_controls('month');
 		build_calendar(date, 'month', body);
 	}
 
@@ -24,9 +28,49 @@ var scheduler = (function()
 		console.log('day');
 	}
 
+	function next(view)
+	{
+		switch(view)
+		{
+			case 'month':
+				var new_date = new Date(active_date.getFullYear(), active_date.getMonth() + 1, active_date.getDate());
+				active_date = new_date;
+				build_month(new_date);
+				break;
+
+			case 'week':
+				break;
+			case 'day':
+				break;
+			default:
+				console.log('error: no view passed');
+		}
+	}
+
+	function prev(view)
+	{
+		switch(view)
+		{
+			case 'month':
+				var new_date = new Date(active_date.getFullYear(), active_date.getMonth() - 1, active_date.getDate());
+				active_date = new_date;
+				build_month(new_date);
+				break;
+
+			case 'week':
+				break;
+			case 'day':
+				break;
+			default:
+				console.log('error: no view passed');
+		}
+	}
+
 	// Private Methods
 	function build_template(date)
 	{
+		active_date = date;
+
 		var scheduler = document.createElement('div');
 		var schedule_head = document.createElement('div');
 		var schedule_body = document.createElement('div');
@@ -41,6 +85,7 @@ var scheduler = (function()
 		scheduler.appendChild(schedule_body);
 
 		var container = document.getElementById('schedule_container');
+		container.innerHTML = '';
 		container.appendChild(scheduler);
 
 		return schedule_body;
@@ -59,6 +104,7 @@ var scheduler = (function()
 					var node = document.createElement('div');
 					node.classList.add('day', 'week_head', week_days[i]);
 					node.innerHTML = week_days[i];
+
 					body.appendChild(node);
 				}
 				break;
@@ -76,6 +122,35 @@ var scheduler = (function()
 				break;
 
 		}
+	}
+
+	function build_controls(view)
+	{
+		var controls = document.createElement('div');
+		controls.id = 'control';
+
+		var prev_but = document.createElement('BUTTON');
+		prev_but.id = 'prev';
+		prev_but.innerHTML = 'Prev';
+
+		var next_but = document.createElement('BUTTON');
+		next_but.id = 'next';
+		next_but.innerHTML = 'Next';
+
+		controls.appendChild(prev_but);
+		controls.appendChild(next_but);
+
+		var schedule_head = document.getElementById('schedule_head');
+		schedule_head.appendChild(controls);
+
+		prev_but.addEventListener('click', function()
+		{
+			prev(view);
+		});
+		next_but.addEventListener('click', function()
+		{
+			next(view);
+		});
 	}
 
 	function build_calendar(date, view, body)
@@ -124,10 +199,12 @@ var scheduler = (function()
 	return {
 		month: build_month,
 		week: build_week,
-		day: build_day
+		day: build_day,
+		prev: prev,
+		next: next
 	};
 
 })();
 
 var d = new Date(2019, 01, 14);
-scheduler.month(d);
+Scheduler.month(d);
