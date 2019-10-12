@@ -9,7 +9,7 @@
 <body>
 	<main>
 		<h1>Virgil's Scheduler</h1>
-		<div id='scheduler'></div>
+		<div id='schedule_container'></div>
 		
 	</main>
 	<script src="js/class_scheduler.js"></script>
