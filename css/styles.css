@@ -17,7 +17,7 @@ main
 	margin: 0 auto;
 	padding: 0;
 	border: solid 2px black;
-	width: 80%;
+	width: 100%;
 }
 #schedule_head
 {
@@ -66,3 +66,8 @@ td
 	padding: 5%;
 	width: 14.28%;
 }
+.today
+{
+	background-color: #fff2e6;
+}
+

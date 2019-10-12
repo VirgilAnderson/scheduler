@@ -26,8 +26,8 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td>29</td>
-							<td>30</td>
+							<td class='muted'>29</td>
+							<td class='muted'>30</td>
 							<td>01</td>
 							<td>02</td>	
 							<td>03</td>	
@@ -40,7 +40,7 @@
 							<td>08</td>
 							<td>09</td>	
 							<td>10</td>	
-							<td>11</td>	
+							<td class='today'>11</td>	
 							<td>12</td>	
 						</tr>
 						<tr>
@@ -67,8 +67,8 @@
 							<td>29</td>
 							<td>30</td>	
 							<td>31</td>	
-							<td>01</td>	
-							<td>02</td>	
+							<td class='muted'>01</td>	
+							<td class='muted'>02</td>	
 						</tr>
 					</tbody>
 				</table>
