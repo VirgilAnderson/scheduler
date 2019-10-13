@@ -62,22 +62,22 @@ body
 	min-height: 0px;
 }
 
-.day.active
+.day.active, .day_week_view.active
 {
 	background-color: white;
 }
 
-.day.active:hover
+.day.active:hover, .day_week_view.active:hover
 {
 	background-color: #ccffcc;
 }
 
-.day.today
+.day.today, .day_week_view.today
 {
 	background-color: #c2c2d6;
 }
 
-.day.today:hover
+.day.today:hover, .day_week_view.today
 {
 	background-color: #ffe699;
 }
@@ -91,6 +91,17 @@ body
 	height: 25px;
 	width: 25px;
 	font-weight: bold;
+}
+
+.day_week_view
+{
+	text-align: center;
+	grid-gap: 0;
+	margin: 0;
+	padding: 5%;
+	min-height: 600px;
+	border: solid .25px black;
+	background-color: #eeeedd;
 }
 
 #control

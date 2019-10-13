@@ -267,8 +267,27 @@ var Scheduler = (function()
 
 			case 'week':
 				var squares = 7;
-				var days = 1;
 
+				var fir_of_curr_wk = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate() - active_date.getDay());
+				//console.log("first of week:" + fir_of_curr_wk);
+
+				for (var i = 0; i < squares; i++)
+				{
+					var node = document.createElement('div');
+					node.classList.add('day_week_view');
+					var date_node = document.createElement('div');
+					date_node.id = fir_of_curr_wk.getDate();
+					date_node.classList.add('date_icon');
+					date_node.innerHTML = fir_of_curr_wk.getDate();
+					node.appendChild(date_node);
+					if (fir_of_curr_wk.getMonth() === active_date.getMonth())
+					{
+						node.classList.add('active');
+					}
+					fir_of_curr_wk = new Date(fir_of_curr_wk.getFullYear(), fir_of_curr_wk.getMonth(), fir_of_curr_wk.getDate() + 1);
+					body.appendChild(node);
+				}
+				/*
 				var fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1);
 				var las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 				var lm_days = fir_of_curr_mon.getDay();
@@ -276,7 +295,7 @@ var Scheduler = (function()
 				for (var i = 0; i < squares; i++)
 				{
 					var node = document.createElement('div');
-					node.classList.add('day');
+					node.classList.add('day_week_view');
 					
 					// Only print the days of the selected month
 					if (i >= lm_days && days <= las_of_curr_mon.getDate())
@@ -290,7 +309,7 @@ var Scheduler = (function()
 						days++;					
 					}
 					body.appendChild(node);
-				}
+				} */
 				break;
 			
 			case 'day':
