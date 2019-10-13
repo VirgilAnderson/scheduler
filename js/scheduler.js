@@ -17,8 +17,6 @@ var Scheduler = (function()
 		build_head('month', body);
 		build_controls('month');
 		build_calendar(date, 'month', body);
-		set_today();
-		
 	}
 
 	function build_week(date)
@@ -31,7 +29,6 @@ var Scheduler = (function()
 		build_head('week', body);
 		build_controls('week');
 		build_calendar(date, 'week', body);
-		set_today();
 	}
 
 	function build_day(date)
@@ -299,6 +296,11 @@ var Scheduler = (function()
 						day_container.classList.add('active');
 					}
 
+					if (is_today(day_to_print) === true)
+					{
+						day_container.classList.add('today');
+					}
+
 					day_to_print = new Date(day_to_print.getFullYear(), day_to_print.getMonth(), day_to_print.getDate() + 1);
 					body.appendChild(day_container);
 				}
@@ -323,6 +325,12 @@ var Scheduler = (function()
 					{
 						day_container.classList.add('active');
 					}
+
+					if (is_today(fir_of_curr_wk) === true)
+					{
+						day_container.classList.add('today');
+					}
+					
 					fir_of_curr_wk = new Date(fir_of_curr_wk.getFullYear(), fir_of_curr_wk.getMonth(), fir_of_curr_wk.getDate() + 1);
 					body.appendChild(day_container);
 				}
@@ -366,15 +374,27 @@ var Scheduler = (function()
 		}
 	}
 
-	function set_today()
+	function is_today(date)
 	{
-		var today = new Date();
+		today = new Date();
+		flag = true;
 
-		if ((today.getMonth() === active_date.getMonth()) && (today.getFullYear() === active_date.getFullYear()))
+		if ((today.getFullYear() === date.getFullYear()) === false)
 		{
-			var node = document.getElementById(today.getDate());
-			node.parentElement.classList.add('today');
+			flag = false;
 		}
+
+		if ((today.getMonth() === date.getMonth()) === false)
+		{
+			flag = false;
+		}
+
+		if ((today.getDate() === date.getDate()) === false)
+		{
+			flag = false;
+		}
+
+		return flag;
 	}
 
 	return {
@@ -387,5 +407,4 @@ var Scheduler = (function()
 
 })();
 
-var d = new Date();
-Scheduler.month(d);
+Scheduler.month(new Date());
