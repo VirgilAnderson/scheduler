@@ -48,6 +48,10 @@ body
 	border: solid .25px black;
 	background-color: #eeeedd;
 }
+.day:hover
+{
+	background-color: gray;
+}
 
 .day.week_head
 {
@@ -98,6 +102,11 @@ body
 	background-color: #eeeedd;
 }
 
+.day_week_view:hover
+{
+	background-color: gray;
+}
+
 .hour
 {
 	border: solid .5px gray;
@@ -105,6 +114,7 @@ body
 	margin: 0;
 	padding: 1% 5%;
 }
+
 .hour:hover
 {
 	background-color: gray;
