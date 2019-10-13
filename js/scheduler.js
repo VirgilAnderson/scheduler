@@ -54,6 +54,9 @@ var Scheduler = (function()
 				break;
 
 			case 'week':
+				var new_date = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate() + 7);
+				active_date = new_date;
+				build_week(new_date);
 				break;
 
 			case 'day':
@@ -76,6 +79,9 @@ var Scheduler = (function()
 				break;
 
 			case 'week':
+				var new_date = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate() - 7);
+				active_date = new_date;
+				build_week(new_date);
 				break;
 
 			case 'day':
