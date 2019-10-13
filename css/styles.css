@@ -1,8 +1,15 @@
 body
 {
 	margin: 0;
-	padding: 2.5%;
+	padding: 0;
 	background-color: #e6e6ff;
+}
+
+#schedule_container
+{
+	margin: 0 auto;
+	padding: 0;
+	width: 99%;
 }
 
 #scheduler

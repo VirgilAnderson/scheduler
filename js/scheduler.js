@@ -20,14 +20,25 @@ var Scheduler = (function()
 		
 	}
 
-	function build_week()
+	function build_week(date)
 	{
-		console.log('week');
+		active_date = date;
+
+		// Build Template
+		body = build_template(date);
+		build_head('week', body);
+		build_controls('week');
+		build_calendar(date, 'week', body);
+		set_today();
 	}
 
-	function build_day()
+	function build_day(date)
 	{
-		console.log('day');
+		active_date = date;
+
+		// Build Template
+		body = build_template(date);
+		build_controls('day');
 	}
 
 	function next(view)
@@ -96,7 +107,7 @@ var Scheduler = (function()
 		
 		// Remove old data before building
 		container.innerHTML = '';
-		
+
 		container.appendChild(scheduler);
 
 		return schedule_body;
@@ -121,7 +132,15 @@ var Scheduler = (function()
 				break;
 
 			case 'week':
-				console.log('week_view');
+				for (var i = 0; i < header_squares; i++)
+				{
+					// Print days headers
+					var node = document.createElement('div');
+					node.classList.add('day', 'week_head', week_days[i]);
+					node.innerHTML = week_days[i];
+
+					body.appendChild(node);
+				}
 				break;
 
 			case 'day':
@@ -170,23 +189,43 @@ var Scheduler = (function()
 
 				week_view.addEventListener('click', function()
 				{
-					build_week(view);
+					build_week(active_date);
 				}, false);
 
 				day_view.addEventListener('click', function()
 				{
-					build_day(view);
+					build_day(active_date);
 				}, false);
 				break;
 
 			case 'week':
 				controls.appendChild(month_view);
 				controls.appendChild(day_view);
+
+				month_view.addEventListener('click', function()
+				{
+					build_month(active_date);
+				}, false);
+
+				day_view.addEventListener('click', function()
+				{
+					build_day(active_date);
+				}, false);
 				break;
 
 			case 'day':
 				controls.appendChild(month_view);
 				controls.appendChild(week_view);
+
+				month_view.addEventListener('click', function()
+				{
+					build_month(active_date);
+				}, false);
+
+				week_view.addEventListener('click', function()
+				{
+					build_week(active_date);
+				}, false);
 				break;
 
 			default:
@@ -245,6 +284,31 @@ var Scheduler = (function()
 				break;
 
 			case 'week':
+				var squares = 7;
+				var days = 1;
+
+				var fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1);
+				var las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+				var lm_days = fir_of_curr_mon.getDay();
+
+				for (var i = 0; i < squares; i++)
+				{
+					var node = document.createElement('div');
+					node.classList.add('day');
+					
+					// Only print the days of the selected month
+					if (i >= lm_days && days <= las_of_curr_mon.getDate())
+					{
+						var date_node = document.createElement('div');
+						date_node.id = days;
+						date_node.classList.add('date_icon');
+						date_node.innerHTML = days;
+						node.appendChild(date_node);
+						node.classList.add('active');
+						days++;					
+					}
+					body.appendChild(node);
+				}
 				break;
 			
 			case 'day':
@@ -260,7 +324,7 @@ var Scheduler = (function()
 	{
 		var today = new Date();
 
-		if (today.getMonth() === active_date.getMonth())
+		if ((today.getMonth() === active_date.getMonth()) && (today.getFullYear() === active_date.getFullYear()))
 		{
 			var node = document.getElementById(today.getDate());
 			node.parentElement.classList.add('today');
@@ -277,5 +341,5 @@ var Scheduler = (function()
 
 })();
 
-var d = new Date(2019, 01, 01);
-Scheduler.month(d);
+var d = new Date();
+Scheduler.week(d);
