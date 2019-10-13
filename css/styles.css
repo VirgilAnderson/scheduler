@@ -47,20 +47,32 @@ body
 	border: solid .25px black;
 	background-color: #eeeedd;
 }
-.day.active
-{
-	background-color: white;
-}
-.day.active:hover
-{
-	background-color: #ccffcc;
-}
 
 .day.week_head
 {
 	background-color: #e6f2ff;
 	padding: 0;
 	min-height: 0px;
+}
+
+.day.active
+{
+	background-color: white;
+}
+
+.day.active:hover
+{
+	background-color: #ccffcc;
+}
+
+.day.today
+{
+	background-color: #c2c2d6;
+}
+
+.day.today:hover
+{
+	background-color: yellow;
 }
 
 #control

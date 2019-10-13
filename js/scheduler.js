@@ -16,6 +16,7 @@ var Scheduler = (function()
 		build_head('month', body);
 		build_controls('month');
 		build_calendar(date, 'month', body);
+		
 	}
 
 	function build_week()
@@ -183,7 +184,10 @@ var Scheduler = (function()
 					// Only print the days of the selected month
 					if (i >= lm_days && days <= las_of_curr_mon.getDate())
 					{
-						node.innerHTML = days;
+						var date_node = document.createElement('div');
+						date_node.id = days;
+						date_node.innerHTML = days;
+						node.appendChild(date_node);
 						node.classList.add('active');
 						days++;					
 					}
@@ -200,6 +204,18 @@ var Scheduler = (function()
 			default:
 				console.log('error: no view passed');
 				break;
+		}
+		set_today();
+	}
+
+	function set_today()
+	{
+		var today = new Date();
+
+		if (today.getMonth() === active_date.getMonth())
+		{
+			var node = document.getElementById(today.getDate());
+			node.parentElement.classList.add('today');
 		}
 	}
 
