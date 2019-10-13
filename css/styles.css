@@ -71,7 +71,7 @@ body
 	background-color: #c2c2d6;
 }
 
-.day.today:hover, .day_week_view.today
+.day.today:hover, .day_week_view.today:hover
 {
 	background-color: #ffe699;
 }
@@ -96,6 +96,28 @@ body
 	min-height: 600px;
 	border: solid .25px black;
 	background-color: #eeeedd;
+}
+
+.hour
+{
+	border: solid .5px gray;
+	background-color: #eeeedd;
+	margin: 0;
+	padding: 1% 5%;
+}
+.hour:hover
+{
+	background-color: gray;
+}
+
+.hour.active
+{
+	background-color: white;
+}
+
+.hour.active:hover
+{
+	background-color: #ccffcc;
 }
 
 #control

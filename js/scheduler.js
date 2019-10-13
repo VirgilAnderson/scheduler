@@ -3,6 +3,7 @@ var Scheduler = (function()
 	var active_date = new Date(), 
 		week_days = ['Sunday', 'Monday', 'Tueday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], 
 		months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], 
+		hours = ['12:00', '1:00', '2:00', '3:00', '4:00', '5:00', '6:00', '7:00', '8:00', '9:00', '10:00', '11:00'],
 		header = 7;
 
 	// Public Methods
@@ -42,6 +43,7 @@ var Scheduler = (function()
 		body = build_template(date);
 		build_head('day', body);
 		build_controls('day');
+		build_calendar(date, 'day', body);
 	}
 
 	function next(view)
@@ -283,22 +285,22 @@ var Scheduler = (function()
 
 				for(var i = 0; i < squares; i++)
 				{
-					var node = document.createElement('div'),
+					var day_container = document.createElement('div'),
 						date_node = document.createElement('div');
 					
-					node.classList.add('day');
+					day_container.classList.add('day');
 					date_node.id = day_to_print.getDate();
 					date_node.classList.add('date_icon');
 					date_node.innerHTML = day_to_print.getDate();
-					node.appendChild(date_node);
+					day_container.appendChild(date_node);
 
 					if (day_to_print.getMonth() === active_date.getMonth())
 					{
-						node.classList.add('active');
+						day_container.classList.add('active');
 					}
 
 					day_to_print = new Date(day_to_print.getFullYear(), day_to_print.getMonth(), day_to_print.getDate() + 1);
-					body.appendChild(node);
+					body.appendChild(day_container);
 				}
 				break;
 
@@ -308,24 +310,54 @@ var Scheduler = (function()
 				
 				for (var i = 0; i < squares; i++)
 				{
-					var node = document.createElement('div');
-					node.classList.add('day_week_view');
-					var date_node = document.createElement('div');
+					var day_container = document.createElement('div'),
+						date_node = document.createElement('div');
+					
+					day_container.classList.add('day_week_view');
 					date_node.id = fir_of_curr_wk.getDate();
 					date_node.classList.add('date_icon');
 					date_node.innerHTML = fir_of_curr_wk.getDate();
-					node.appendChild(date_node);
+					day_container.appendChild(date_node);
 
 					if (fir_of_curr_wk.getMonth() === active_date.getMonth())
 					{
-						node.classList.add('active');
+						day_container.classList.add('active');
 					}
 					fir_of_curr_wk = new Date(fir_of_curr_wk.getFullYear(), fir_of_curr_wk.getMonth(), fir_of_curr_wk.getDate() + 1);
-					body.appendChild(node);
+					body.appendChild(day_container);
 				}
 				break;
 			
 			case 'day':
+				var total_hours = 24;
+				fir_hr_of_day = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate(), 0);
+
+				for (var i = 0; i < total_hours; i++)
+				{
+					var hour_node = document.createElement('div'),
+						hour_container = document.createElement('div');
+
+					hour_node.classList.add('hour_icon');
+					hour_node.id = hours[fir_hr_of_day.getHours()];
+					if(fir_hr_of_day.getHours() > 11)
+					{
+						hour_node.innerHTML = hours[fir_hr_of_day.getHours() - 12];
+					}
+					else
+					{
+						hour_node.innerHTML = hours[fir_hr_of_day.getHours()];
+					}
+
+					if(fir_hr_of_day.getHours() > 6 && fir_hr_of_day.getHours() < 18)
+					{
+						hour_container.classList.add('active');
+					}
+					
+					hour_container.appendChild(hour_node);
+					hour_container.classList.add('hour');
+					fir_hr_of_day = new Date(fir_hr_of_day.getFullYear(), fir_hr_of_day.getMonth(), fir_hr_of_day.getDate(), fir_hr_of_day.getHours() + 1);
+					body.appendChild(hour_container);
+				}
 				break;
 
 			default:
