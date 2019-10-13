@@ -186,6 +186,7 @@ var Scheduler = (function()
 					{
 						var date_node = document.createElement('div');
 						date_node.id = days;
+						date_node.classList.add('date_icon');
 						date_node.innerHTML = days;
 						node.appendChild(date_node);
 						node.classList.add('active');
