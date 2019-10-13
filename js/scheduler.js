@@ -1,9 +1,6 @@
 var Scheduler = (function()
 {
-	var active_date = new Date();
-	var week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-	var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	var header = 7;
+	var active_date = new Date(), week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], header = 7;
 
 	// Public Methods
 	function build_month(date)
