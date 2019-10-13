@@ -22,6 +22,7 @@ var Scheduler = (function()
 
 	function build_week(date)
 	{
+		// Set global date
 		active_date = date;
 
 		// Build Template
@@ -34,6 +35,7 @@ var Scheduler = (function()
 
 	function build_day(date)
 	{
+		// Set global date
 		active_date = date;
 
 		// Build Template
@@ -90,9 +92,7 @@ var Scheduler = (function()
 	{
 		active_date = date;
 
-		var scheduler = document.createElement('div');
-		var schedule_head = document.createElement('div');
-		var schedule_body = document.createElement('div');
+		var scheduler = document.createElement('div'), schedule_head = document.createElement('div'), schedule_body = document.createElement('div'), container = document.getElementById('schedule_container');
 
 		scheduler.id = 'scheduler';
 		schedule_head.id = 'schedule_head';
@@ -103,8 +103,6 @@ var Scheduler = (function()
 		scheduler.appendChild(schedule_head);
 		scheduler.appendChild(schedule_body);
 
-		var container = document.getElementById('schedule_container');
-		
 		// Remove old data before building
 		container.innerHTML = '';
 
@@ -113,71 +111,24 @@ var Scheduler = (function()
 		return schedule_body;
 	}
 
-	function build_head(view, body)
-	{
-		var header_squares = 7;
-
-		switch(view)
-		{
-			case 'month':
-				for (var i = 0; i < header_squares; i++)
-				{
-					// Print days headers
-					var node = document.createElement('div');
-					node.classList.add('day', 'week_head', week_days[i]);
-					node.innerHTML = week_days[i];
-
-					body.appendChild(node);
-				}
-				break;
-
-			case 'week':
-				for (var i = 0; i < header_squares; i++)
-				{
-					// Print days headers
-					var node = document.createElement('div');
-					node.classList.add('day', 'week_head', week_days[i]);
-					node.innerHTML = week_days[i];
-
-					body.appendChild(node);
-				}
-				break;
-
-			case 'day':
-				console.log('day_view');
-				break;
-
-			default:
-				console.log('error: no view passed');
-				break;
-		}
-	}
-
 	function build_controls(view)
 	{
-		var controls = document.createElement('div');
-		controls.id = 'control';
-
-		var prev_but = document.createElement('BUTTON');
+		var controls = document.createElement('div'), prev_but = document.createElement('BUTTON'), next_but = document.createElement('BUTTON'), month_view = document.createElement('A'), week_view = document.createElement('A'), day_view = document.createElement('A'), schedule_head = document.getElementById('schedule_head');
+		controls.id = 'control';		
 		prev_but.id = 'prev';
 		prev_but.innerHTML = 'Prev';
-
-		var next_but = document.createElement('BUTTON');
 		next_but.id = 'next';
 		next_but.innerHTML = 'Next';
 
 		controls.appendChild(prev_but);
 		controls.appendChild(next_but);
-
-		var month_view = document.createElement('A');
+		
 		month_view.setAttribute('href', '#');
 		month_view.innerHTML = "Month";
-
-		var week_view = document.createElement('A');
+		
 		week_view.setAttribute('href', '#');
 		week_view.innerHTML = "Week";
-
-		var day_view = document.createElement('A');
+		
 		day_view.setAttribute('href', '#');
 		day_view.innerHTML = "Day";
 
@@ -233,7 +184,6 @@ var Scheduler = (function()
 				break;
 		}
 
-		var schedule_head = document.getElementById('schedule_head');
 		schedule_head.appendChild(controls);
 
 		prev_but.addEventListener('click', function()
@@ -246,17 +196,52 @@ var Scheduler = (function()
 		}, false);
 	}
 
+	function build_head(view, body)
+	{
+		var header_squares = 7;
+
+		switch(view)
+		{
+			case 'month':
+				for (var i = 0; i < header_squares; i++)
+				{
+					// Print days headers
+					var node = document.createElement('div');
+					node.classList.add('day', 'week_head', week_days[i]);
+					node.innerHTML = week_days[i];
+
+					body.appendChild(node);
+				}
+				break;
+
+			case 'week':
+				for (var i = 0; i < header_squares; i++)
+				{
+					// Print days headers
+					var node = document.createElement('div');
+					node.classList.add('day', 'week_head', week_days[i]);
+					node.innerHTML = week_days[i];
+
+					body.appendChild(node);
+				}
+				break;
+
+			case 'day':
+				console.log('day_view');
+				break;
+
+			default:
+				console.log('error: no view passed');
+				break;
+		}
+	}
+
 	function build_calendar(date, view, body)
 	{
 		switch(view)
 		{
 			case 'month':
-				var squares = 35;
-				var days = 1;
-
-				var fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1);
-				var las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-				var lm_days = fir_of_curr_mon.getDay();
+				var squares = 35,days = 1, fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1), las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0), lm_days = fir_of_curr_mon.getDay();
 
 				if ((fir_of_curr_mon.getDay() > 4 && las_of_curr_mon.getDate() > 30) || (fir_of_curr_mon.getDay() > 5 && las_of_curr_mon.getDate() > 29))
 				{
@@ -342,4 +327,4 @@ var Scheduler = (function()
 })();
 
 var d = new Date();
-Scheduler.week(d);
+Scheduler.month(d);
