@@ -38,12 +38,6 @@ body
 	font-size: 1.5em;
 }
 
-#schedule_body
-{
-	display: grid;
-	grid-template-columns: auto auto auto auto auto auto auto;
-}
-
 .day
 {
 	text-align: center;

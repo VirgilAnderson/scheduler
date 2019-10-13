@@ -1,7 +1,7 @@
 var Scheduler = (function()
 {
 	var active_date = new Date(), 
-		week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], 
+		week_days = ['Sunday', 'Monday', 'Tueday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], 
 		months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], 
 		header = 7;
 
@@ -40,6 +40,7 @@ var Scheduler = (function()
 
 		// Build Template
 		body = build_template(date);
+		build_head('day', body);
 		build_controls('day');
 	}
 
@@ -60,6 +61,9 @@ var Scheduler = (function()
 				break;
 
 			case 'day':
+				var new_date = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate() + 1);
+				active_date = new_date;
+				build_day(new_date);
 				break;
 
 			default:
@@ -85,6 +89,9 @@ var Scheduler = (function()
 				break;
 
 			case 'day':
+				var new_date = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate() - 1);
+				active_date = new_date;
+				build_day(new_date);
 				break;
 
 			default:
@@ -111,9 +118,7 @@ var Scheduler = (function()
 		scheduler.appendChild(schedule_head);
 		scheduler.appendChild(schedule_body);
 
-		// Remove old data before building
 		container.innerHTML = '';
-
 		container.appendChild(scheduler);
 
 		return schedule_body;
@@ -150,6 +155,9 @@ var Scheduler = (function()
 		switch(view)
 		{
 			case 'month':
+				schedule_body.style.display = 'grid';
+				schedule_body.style.gridTemplateColumns = 'auto auto auto auto auto auto auto';
+		
 				controls.appendChild(week_view);
 				controls.appendChild(day_view);
 
@@ -165,6 +173,9 @@ var Scheduler = (function()
 				break;
 
 			case 'week':
+				schedule_body.style.display = 'grid';
+				schedule_body.style.gridTemplateColumns = 'auto auto auto auto auto auto auto';
+		
 				controls.appendChild(month_view);
 				controls.appendChild(day_view);
 
@@ -240,7 +251,11 @@ var Scheduler = (function()
 				break;
 
 			case 'day':
-				console.log('day_view');
+				var node = document.createElement('div');
+				node.classList.add('day', 'week_head');
+				node.innerHTML = week_days[active_date.getDay()] + ", " + months[active_date.getMonth()] + " " + active_date.getDate() + ", " + active_date.getFullYear();
+
+				body.appendChild(node);
 				break;
 
 			default:
