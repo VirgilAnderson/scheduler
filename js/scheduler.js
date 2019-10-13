@@ -1,6 +1,9 @@
 var Scheduler = (function()
 {
-	var active_date = new Date(), week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], header = 7;
+	var active_date = new Date(), 
+		week_days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], 
+		months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], 
+		header = 7;
 
 	// Public Methods
 	function build_month(date)
@@ -89,7 +92,9 @@ var Scheduler = (function()
 	{
 		active_date = date;
 
-		var scheduler = document.createElement('div'), schedule_head = document.createElement('div'), schedule_body = document.createElement('div'), container = document.getElementById('schedule_container');
+		var scheduler = document.createElement('div'), 
+			schedule_head = document.createElement('div'), schedule_body = document.createElement('div'), 
+			container = document.getElementById('schedule_container');
 
 		scheduler.id = 'scheduler';
 		schedule_head.id = 'schedule_head';
@@ -110,7 +115,14 @@ var Scheduler = (function()
 
 	function build_controls(view)
 	{
-		var controls = document.createElement('div'), prev_but = document.createElement('BUTTON'), next_but = document.createElement('BUTTON'), month_view = document.createElement('A'), week_view = document.createElement('A'), day_view = document.createElement('A'), schedule_head = document.getElementById('schedule_head');
+		var controls = document.createElement('div'), 
+			prev_but = document.createElement('BUTTON'), 
+			next_but = document.createElement('BUTTON'), 
+			month_view = document.createElement('A'), 
+			week_view = document.createElement('A'), 
+			day_view = document.createElement('A'), 
+			schedule_head = document.getElementById('schedule_head');
+
 		controls.id = 'control';		
 		prev_but.id = 'prev';
 		prev_but.innerHTML = 'Prev';
@@ -202,7 +214,6 @@ var Scheduler = (function()
 			case 'month':
 				for (var i = 0; i < header_squares; i++)
 				{
-					// Print days headers
 					var node = document.createElement('div');
 					node.classList.add('day', 'week_head', week_days[i]);
 					node.innerHTML = week_days[i];
@@ -214,7 +225,6 @@ var Scheduler = (function()
 			case 'week':
 				for (var i = 0; i < header_squares; i++)
 				{
-					// Print days headers
 					var node = document.createElement('div');
 					node.classList.add('day', 'week_head', week_days[i]);
 					node.innerHTML = week_days[i];
@@ -238,39 +248,43 @@ var Scheduler = (function()
 		switch(view)
 		{
 			case 'month':
-				var squares = 35,days = 1, fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1), las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0), lm_days = fir_of_curr_mon.getDay();
+				var squares = 35,
+					fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1),
+					las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0);
 
-				if ((fir_of_curr_mon.getDay() > 4 && las_of_curr_mon.getDate() > 30) || (fir_of_curr_mon.getDay() > 5 && las_of_curr_mon.getDate() > 29))
+				if ((fir_of_curr_mon.getDay() > 4 && las_of_curr_mon.getDate() > 30) || 
+					(fir_of_curr_mon.getDay() > 5 && las_of_curr_mon.getDate() > 29))
 				{
 					squares = 42;
 				}
 
-				for (var i = 0; i < squares; i++)
+				var day_to_print = new Date(fir_of_curr_mon.getFullYear(), fir_of_curr_mon.getMonth(), fir_of_curr_mon.getDate() - fir_of_curr_mon.getDay());
+
+				for(var i = 0; i < squares; i++)
 				{
-					var node = document.createElement('div');
-					node.classList.add('day');
+					var node = document.createElement('div'),
+						date_node = document.createElement('div');
 					
-					// Only print the days of the selected month
-					if (i >= lm_days && days <= las_of_curr_mon.getDate())
+					node.classList.add('day');
+					date_node.id = day_to_print.getDate();
+					date_node.classList.add('date_icon');
+					date_node.innerHTML = day_to_print.getDate();
+					node.appendChild(date_node);
+
+					if (day_to_print.getMonth() === active_date.getMonth())
 					{
-						var date_node = document.createElement('div');
-						date_node.id = days;
-						date_node.classList.add('date_icon');
-						date_node.innerHTML = days;
-						node.appendChild(date_node);
 						node.classList.add('active');
-						days++;					
 					}
+
+					day_to_print = new Date(day_to_print.getFullYear(), day_to_print.getMonth(), day_to_print.getDate() + 1);
 					body.appendChild(node);
 				}
 				break;
 
 			case 'week':
-				var squares = 7;
-
-				var fir_of_curr_wk = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate() - active_date.getDay());
-				//console.log("first of week:" + fir_of_curr_wk);
-
+				var squares = 7,
+					fir_of_curr_wk = new Date(active_date.getFullYear(), active_date.getMonth(), active_date.getDate() - active_date.getDay());
+				
 				for (var i = 0; i < squares; i++)
 				{
 					var node = document.createElement('div');
@@ -280,6 +294,7 @@ var Scheduler = (function()
 					date_node.classList.add('date_icon');
 					date_node.innerHTML = fir_of_curr_wk.getDate();
 					node.appendChild(date_node);
+
 					if (fir_of_curr_wk.getMonth() === active_date.getMonth())
 					{
 						node.classList.add('active');
@@ -287,29 +302,6 @@ var Scheduler = (function()
 					fir_of_curr_wk = new Date(fir_of_curr_wk.getFullYear(), fir_of_curr_wk.getMonth(), fir_of_curr_wk.getDate() + 1);
 					body.appendChild(node);
 				}
-				/*
-				var fir_of_curr_mon = new Date(date.getFullYear(), date.getMonth(), 1);
-				var las_of_curr_mon = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-				var lm_days = fir_of_curr_mon.getDay();
-
-				for (var i = 0; i < squares; i++)
-				{
-					var node = document.createElement('div');
-					node.classList.add('day_week_view');
-					
-					// Only print the days of the selected month
-					if (i >= lm_days && days <= las_of_curr_mon.getDate())
-					{
-						var date_node = document.createElement('div');
-						date_node.id = days;
-						date_node.classList.add('date_icon');
-						date_node.innerHTML = days;
-						node.appendChild(date_node);
-						node.classList.add('active');
-						days++;					
-					}
-					body.appendChild(node);
-				} */
 				break;
 			
 			case 'day':
