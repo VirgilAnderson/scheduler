@@ -16,6 +16,7 @@ var Scheduler = (function()
 		build_head('month', body);
 		build_controls('month');
 		build_calendar(date, 'month', body);
+		set_today();
 		
 	}
 
@@ -92,7 +93,10 @@ var Scheduler = (function()
 		scheduler.appendChild(schedule_body);
 
 		var container = document.getElementById('schedule_container');
+		
+		// Remove old data before building
 		container.innerHTML = '';
+		
 		container.appendChild(scheduler);
 
 		return schedule_body;
@@ -146,17 +150,61 @@ var Scheduler = (function()
 		controls.appendChild(prev_but);
 		controls.appendChild(next_but);
 
+		var month_view = document.createElement('A');
+		month_view.setAttribute('href', '#');
+		month_view.innerHTML = "Month";
+
+		var week_view = document.createElement('A');
+		week_view.setAttribute('href', '#');
+		week_view.innerHTML = "Week";
+
+		var day_view = document.createElement('A');
+		day_view.setAttribute('href', '#');
+		day_view.innerHTML = "Day";
+
+		switch(view)
+		{
+			case 'month':
+				controls.appendChild(week_view);
+				controls.appendChild(day_view);
+
+				week_view.addEventListener('click', function()
+				{
+					build_week(view);
+				}, false);
+
+				day_view.addEventListener('click', function()
+				{
+					build_day(view);
+				}, false);
+				break;
+
+			case 'week':
+				controls.appendChild(month_view);
+				controls.appendChild(day_view);
+				break;
+
+			case 'day':
+				controls.appendChild(month_view);
+				controls.appendChild(week_view);
+				break;
+
+			default:
+				console.log('error: no view passed');
+				break;
+		}
+
 		var schedule_head = document.getElementById('schedule_head');
 		schedule_head.appendChild(controls);
 
 		prev_but.addEventListener('click', function()
 		{
 			prev(view);
-		});
+		}, false);
 		next_but.addEventListener('click', function()
 		{
 			next(view);
-		});
+		}, false);
 	}
 
 	function build_calendar(date, view, body)
@@ -206,7 +254,6 @@ var Scheduler = (function()
 				console.log('error: no view passed');
 				break;
 		}
-		set_today();
 	}
 
 	function set_today()
